@@ -27,7 +27,7 @@ class StringCalculator
   end
 
   def extract_single_delimiter
-    @delimiters_section[2..-1]
+    @delimiters_section[2..]
   end
 
   def extract_multiple_delimiters
