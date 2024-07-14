@@ -7,6 +7,7 @@ class StringCalculator
     return 0 if @numbers.empty?
 
     @delimiters = DEFAULT_DELIMITERS
+    validate_positive_numbers!
     final_result
   end
 
@@ -18,6 +19,18 @@ class StringCalculator
 
   def delimiters_regex
     Regexp.union(@delimiters)
+  end
+
+  def validate_positive_numbers!
+    raise negative_numbers_error_text unless negative_numbers.empty?
+  end
+
+  def negative_numbers
+    @_negative_numbers ||= numbers_list.select { |num| num < 0 }
+  end
+
+  def negative_numbers_error_text
+    "Negative numbers not allowed: #{negative_numbers.join(', ')}"
   end
 
   def final_result
